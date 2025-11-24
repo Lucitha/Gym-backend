@@ -1,0 +1,469 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Gym API",
+        "description": "API pour la gestion de salle de sport",
+        "contact": {
+            "email": "admin@gym-gestion.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "Serveur de développement"
+        }
+    ],
+    "paths": {
+        "/api/course-type/list": {
+            "get": {
+                "tags": [
+                    "Course Types"
+                ],
+                "summary": "Liste des types de cours",
+                "operationId": "e2618b6f7b467d83172278e2a41d7606",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/course-type/new": {
+            "post": {
+                "tags": [
+                    "Course Types"
+                ],
+                "summary": "Ajouter un nouveau type de cours",
+                "operationId": "33d62760ddccce51f1486352c0478041",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "course_type_name"
+                                ],
+                                "properties": {
+                                    "course_type_name": {
+                                        "type": "string",
+                                        "maxLength": 45,
+                                        "example": "Mathematics"
+                                    },
+                                    "active_flag": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Création avec succès"
+                    },
+                    "400": {
+                        "description": "Demande invalide"
+                    }
+                }
+            }
+        },
+        "api/course-type/status/{id}": {
+            "patch": {
+                "tags": [
+                    "Course Types"
+                ],
+                "summary": "Modifier le statut d'un type de cours",
+                "operationId": "62c226b51457321a7b71324a77992bbb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/course-type/update/{id}": {
+            "put": {
+                "tags": [
+                    "Course Types"
+                ],
+                "summary": "Mettre à jours un type de cours",
+                "operationId": "eb56a1bc1ad49b2d1090a8bf31f8a329",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la salle",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "course_type_name"
+                                ],
+                                "properties": {
+                                    "course_type_name": {
+                                        "type": "string",
+                                        "maxLength": 45,
+                                        "example": "Mathematics"
+                                    },
+                                    "active_flag": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Mis à jour effectuée avec succès"
+                    },
+                    "400": {
+                        "description": "Demande invalide"
+                    }
+                }
+            }
+        },
+        "/api/rooms/list": {
+            "get": {
+                "tags": [
+                    "Rooms"
+                ],
+                "summary": "Liste des salles",
+                "operationId": "d32929477f9fa7ac7828816c17d0c99a",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/rooms/new": {
+            "post": {
+                "tags": [
+                    "Rooms"
+                ],
+                "summary": "Ajouter une nouvelle salle",
+                "operationId": "a726f9ee5a345991beaf1e89765f4455",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "location",
+                                    "capacity"
+                                ],
+                                "properties": {
+                                    "room_name": {
+                                        "type": "string",
+                                        "maxLength": 255,
+                                        "example": "Salle A"
+                                    },
+                                    "active_flag": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "capacity": {
+                                        "type": "integer",
+                                        "example": 50
+                                    },
+                                    "length": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 20.5
+                                    },
+                                    "width": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 15
+                                    },
+                                    "height": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 10
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Création avec succès"
+                    },
+                    "400": {
+                        "description": "Demande invalide"
+                    }
+                }
+            }
+        },
+        "/api/rooms/status/{id}": {
+            "patch": {
+                "tags": [
+                    "Rooms"
+                ],
+                "summary": "Activer/Désactiver une salle",
+                "operationId": "6bb8b0a74b612cf709da98f4d5fd5f28",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la salle",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Réussite"
+                    },
+                    "404": {
+                        "description": "Introuvable"
+                    }
+                }
+            }
+        },
+        "/api/rooms/update/{id}": {
+            "put": {
+                "tags": [
+                    "Rooms"
+                ],
+                "summary": "Mettre les informations relatives à une salle",
+                "operationId": "017102629a3e515381f7b470ea93e881",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la salle",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "room_name": {
+                                        "type": "string",
+                                        "maxLength": 255,
+                                        "example": "Salle A"
+                                    },
+                                    "active_flag": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "capacity": {
+                                        "type": "integer",
+                                        "example": 50
+                                    },
+                                    "length": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 20.5
+                                    },
+                                    "width": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 15
+                                    },
+                                    "height": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 10
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mise à jour réussie"
+                    },
+                    "404": {
+                        "description": "Salle introuvable"
+                    }
+                }
+            }
+        },
+        "/api/rooms/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Rooms"
+                ],
+                "summary": "Suppression d'une salle",
+                "operationId": "ef047618b43ac3f380c2e1d99274bb09",
+                "responses": {
+                    "200": {
+                        "description": "Suppression effectué avec succès"
+                    },
+                    "401": {
+                        "description": "Vous n'êtes pas autorisé à réaliser cette action"
+                    },
+                    "404": {
+                        "description": "Salle introuvable"
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Liste des utilisateurs",
+                "operationId": "acd5fdd788bff3f0d395505762e25efc",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/members": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Liste des membres",
+                "operationId": "acb5b053b041ba0c0353a742001faf93",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/newUser": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Ajout d'un nouvel utilisateur",
+                "operationId": "5cee8645d1ff25bbc465d7489f4a404f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "Cotonou"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "user@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "minLength": 8,
+                                        "example": "C0mplexP@ssw0rd"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Commune created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Utilisateur enregistré avec succès"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Course Types",
+            "description": "Course Types"
+        },
+        {
+            "name": "Rooms",
+            "description": "Rooms"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
+        }
+    ]
+}
