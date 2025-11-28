@@ -19,6 +19,184 @@
         }
     ],
     "paths": {
+        "/api/categories/list": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Liste des catégories",
+                "operationId": "ee8b1cf36393c8130a5afd11dfb1247b",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/categories/new": {
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Ajout de catégorie",
+                "operationId": "7af26b6954e5f403dbd3ef29fef5be0b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "category_name"
+                                ],
+                                "properties": {
+                                    "category_name": {
+                                        "type": "string",
+                                        "maxLength": 45,
+                                        "example": "Mathematics"
+                                    },
+                                    "active_flag": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Enregistrement effectué"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Récupérer une catégorie par ID",
+                "operationId": "5e3737f5cfd6dbb5742c61175b5fb0d4",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/categories/status/{id}": {
+            "patch": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Modifier le statut d'une catégorie",
+                "operationId": "f84ea164feba8ed3c99a174c22847c71",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la catégorie",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Statut modifié avec succès"
+                    },
+                    "404": {
+                        "description": "Catégorie non trouvée"
+                    }
+                }
+            }
+        },
+        "/api/categories/update/{id}": {
+            "put": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Mettre à jour les informations d'une catégorie",
+                "operationId": "09cffd484214f3378b117fa9c04fbf81",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la categorie",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "category_name"
+                                ],
+                                "properties": {
+                                    "category_name": {
+                                        "type": "string",
+                                        "maxLength": 45,
+                                        "example": "Mathematics"
+                                    },
+                                    "active_flag": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Mis à jour effectuée avec succès"
+                    },
+                    "400": {
+                        "description": "Demande invalide"
+                    }
+                }
+            }
+        },
+        "/api/categories/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Suppression d'une catégorie",
+                "operationId": "7bd407cda39111b480c664d40e04385b",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/api/course-type/list": {
             "get": {
                 "tags": [
@@ -74,13 +252,13 @@
                 }
             }
         },
-        "api/course-type/status/{id}": {
+        "/api/course-type/status/{id}": {
             "patch": {
                 "tags": [
                     "Course Types"
                 ],
                 "summary": "Modifier le statut d'un type de cours",
-                "operationId": "62c226b51457321a7b71324a77992bbb",
+                "operationId": "d5ea87b5ea21c181281addf97edc3682",
                 "parameters": [
                     {
                         "name": "id",
@@ -153,6 +331,209 @@
                     },
                     "400": {
                         "description": "Demande invalide"
+                    }
+                }
+            }
+        },
+        "/api/duration-types/list": {
+            "get": {
+                "tags": [
+                    "Duration Types"
+                ],
+                "summary": "Liste des types de durée",
+                "operationId": "415ad78fced512cd8f7ded7b3d3b9c5b",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/duration-types/{id}": {
+            "get": {
+                "tags": [
+                    "Duration Types"
+                ],
+                "summary": "Détails d'un type de durée",
+                "operationId": "971d2d2b3352cf7b35d110be1f0406bc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du type de durée",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/duration-types/new": {
+            "post": {
+                "tags": [
+                    "Duration Types"
+                ],
+                "summary": "Ajouter un type de durée",
+                "operationId": "062295ba3348ebb33915f335ba9140b5",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "Duration_type"
+                                ],
+                                "properties": {
+                                    "Duration_type": {
+                                        "type": "string",
+                                        "maxLength": 45,
+                                        "example": "Hour"
+                                    },
+                                    "active_flag": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Enregistrement effectué"
+                    },
+                    "401": {
+                        "description": "Action non autorisée"
+                    }
+                }
+            }
+        },
+        "/api/duration-types/status/{id}": {
+            "patch": {
+                "tags": [
+                    "Duration Types"
+                ],
+                "summary": "Mettre à jour le statut actif/inactif d'un type de durée",
+                "operationId": "7919dd8490fa251c196bd3b87175d018",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du type de durée",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Action non autorisée"
+                    },
+                    "404": {
+                        "description": "Non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/duration-types/update/{id}": {
+            "put": {
+                "tags": [
+                    "Duration Types"
+                ],
+                "summary": "Mettre  à jour les informations d'un type de durée",
+                "operationId": "990cba3d5d98d457c011a3814ccb38ea",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du type de durée",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "Duration_type"
+                                ],
+                                "properties": {
+                                    "Duration_type": {
+                                        "type": "string",
+                                        "maxLength": 45,
+                                        "example": "Hour"
+                                    },
+                                    "active_flag": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mise à jour effectuée avec succès"
+                    },
+                    "401": {
+                        "description": "Action non autorisée"
+                    },
+                    "404": {
+                        "description": "Non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/duration-types/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Duration Types"
+                ],
+                "summary": "Summary",
+                "operationId": "6dcaeb2076b0823b3735460cffd53e0d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du type de durée",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 }
             }
@@ -336,6 +717,17 @@
                 ],
                 "summary": "Suppression d'une salle",
                 "operationId": "ef047618b43ac3f380c2e1d99274bb09",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la salle",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Suppression effectué avec succès"
@@ -345,6 +737,443 @@
                     },
                     "404": {
                         "description": "Salle introuvable"
+                    }
+                }
+            }
+        },
+        "/api/subscription-status/list": {
+            "get": {
+                "tags": [
+                    "Subscription status"
+                ],
+                "summary": "Liste des statuts de souscription",
+                "operationId": "4170f3874aea5d9b19fa15dbba081210",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Non autorisé"
+                    },
+                    "404": {
+                        "description": "Non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/subscription-status/{id}": {
+            "get": {
+                "tags": [
+                    "Subscription status"
+                ],
+                "summary": "Détails d'un statut d'abonnement",
+                "operationId": "ffc3578677d4f47fb2449577a87d3d13",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du statut d'abonnement",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/subscription-status/new": {
+            "post": {
+                "tags": [
+                    "Subscription status"
+                ],
+                "summary": "Ajout d'un statut d'abonnement",
+                "operationId": "0dad095013c54220da7a8e75d0fb0677",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "subscription_status": {
+                                        "type": "string",
+                                        "maxLength": 45,
+                                        "example": "Active"
+                                    },
+                                    "active_flag": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Enregistrement effectué"
+                    },
+                    "401": {
+                        "description": "Action non autorisée"
+                    },
+                    "404": {
+                        "description": "Non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/subscription-status/status/{id}": {
+            "patch": {
+                "tags": [
+                    "Subscription status"
+                ],
+                "summary": "Toggle active flag of a subscription status",
+                "operationId": "67dd7193294e8025c185e57ddd9e63e6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du statut d'abonnement",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Enregistrement effectué"
+                    },
+                    "401": {
+                        "description": "Non autorisé"
+                    },
+                    "404": {
+                        "description": "Non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/subscription-status/update/{id}": {
+            "put": {
+                "tags": [
+                    "Subscription status"
+                ],
+                "summary": "Mettre à jour un statut d'abonnement",
+                "operationId": "c00e32c76272cf69a46efe03444ca884",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du statut d'abonnement",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "subscription_status": {
+                                        "type": "string",
+                                        "maxLength": 45,
+                                        "example": "Inactive"
+                                    },
+                                    "active_flag": {
+                                        "type": "integer",
+                                        "example": 0
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mis à jour effectuée avec succès"
+                    },
+                    "400": {
+                        "description": "Demande invalide"
+                    },
+                    "404": {
+                        "description": "Non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/subscription-status/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Subscription status"
+                ],
+                "summary": "Suppression d'un statut d'abonnement",
+                "operationId": "9d554e9281fa1969748ecccc2ede9d09",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du statut d'abonnement",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/subscription-types/list": {
+            "get": {
+                "tags": [
+                    "Subscription Types"
+                ],
+                "summary": "Liste des types d'abonnement",
+                "operationId": "bf4d2f4650402eee64ec452413f3f493",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/subscription-types/{id}": {
+            "get": {
+                "tags": [
+                    "Subscription Types"
+                ],
+                "summary": "Détails d'un type d'abonnement",
+                "operationId": "b5c28e814b770d19c825f629a1816c14",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du type de durée",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/subscription-types/new": {
+            "post": {
+                "tags": [
+                    "Subscription Types"
+                ],
+                "summary": "Ajout de type d'abonnement",
+                "operationId": "b0a86739f8556793188b94d6eab219a7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "amount",
+                                    "duration_type_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 45,
+                                        "example": "Premium"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "maxLength": 45,
+                                        "example": "Abonnement premium"
+                                    },
+                                    "amount": {
+                                        "type": "string",
+                                        "maxLength": 45,
+                                        "example": "49.99"
+                                    },
+                                    "duration_type_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "active_flag": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Enregistrement effectué"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/subscription-types/status/{id}": {
+            "patch": {
+                "tags": [
+                    "Subscription Types"
+                ],
+                "summary": "Modifier le statut actif/inactif d'un type d'abonnement",
+                "operationId": "07a0a609dff8eaf12eacea0069524ae2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du type d'abonnement",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Modification effectuée"
+                    },
+                    "401": {
+                        "description": "Action non autorisée"
+                    },
+                    "404": {
+                        "description": "Non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/subscription-types/update/{id}": {
+            "put": {
+                "tags": [
+                    "Subscription Types"
+                ],
+                "summary": "Mettre à jour les informations d'un type d'abonnement",
+                "operationId": "8def9960ac133d2f2b15c7cc37bf4467",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du type d'abonnement",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 45,
+                                        "example": "Premium"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "maxLength": 45,
+                                        "example": "Abonnement premium"
+                                    },
+                                    "amount": {
+                                        "type": "string",
+                                        "maxLength": 45,
+                                        "example": "49.99"
+                                    },
+                                    "duration_type_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "active_flag": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mise à jour effectuée avec succès"
+                    },
+                    "401": {
+                        "description": "Action non autorisée"
+                    },
+                    "404": {
+                        "description": "Non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/subscription-types/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Subscription Types"
+                ],
+                "summary": "Suppression d'un type d'abonnement",
+                "operationId": "2fbbaffb2861a75aa6c6dd9291e1c190",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du type d'abonnement",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 }
             }
@@ -454,12 +1283,28 @@
     },
     "tags": [
         {
+            "name": "Categories",
+            "description": "Categories"
+        },
+        {
             "name": "Course Types",
             "description": "Course Types"
         },
         {
+            "name": "Duration Types",
+            "description": "Duration Types"
+        },
+        {
             "name": "Rooms",
             "description": "Rooms"
+        },
+        {
+            "name": "Subscription status",
+            "description": "Subscription status"
+        },
+        {
+            "name": "Subscription Types",
+            "description": "Subscription Types"
         },
         {
             "name": "Users",

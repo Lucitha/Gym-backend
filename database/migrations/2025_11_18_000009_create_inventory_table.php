@@ -17,7 +17,7 @@ return new class extends Migration
             $table->tinyInteger('active_flag')->nullable();
             $table->string('brand', 45)->nullable();
             $table->string('model', 45)->nullable();
-            $table->integer('quantity')->nullable();
+            $table->string('code', 45)->nullable();
             $table->string('description', 45)->nullable();
             $table->integer('category_id');
             

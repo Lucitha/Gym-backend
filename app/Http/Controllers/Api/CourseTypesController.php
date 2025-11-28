@@ -20,7 +20,7 @@ class CourseTypesController extends Controller
      *   @OA\Response(response=200, description="OK"),
      * )
      */
-    public function getCourseTypes(Request $request)
+    public function getCourseTypes()
     {
         $courseTypes=CourseTypes::all();
 
@@ -91,7 +91,7 @@ class CourseTypesController extends Controller
     /**
      * @OA\Patch(
      *   tags={"Course Types"},
-     *   path="api/course-type/status/{id}",
+     *   path="/api/course-type/status/{id}",
      *   summary="Modifier le statut d'un type de cours",
      *   @OA\Parameter(
      *         name="id",
@@ -107,7 +107,7 @@ class CourseTypesController extends Controller
      */
 
     public function toggleStatus($id){
-        // dd($id);
+        // dd('hi,je suis là');
         $type= CourseTypes::Find($id);
         if(!$type){
             return response()->json([

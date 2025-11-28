@@ -24,7 +24,7 @@ class RoomsController extends Controller
      *   @OA\Response(response=200, description="OK"),
      * )
      */
-    public function getRooms(Request $request)
+    public function getRooms()
     {
         // echo('pn est ici');
         $rooms=Room::all();
@@ -203,6 +203,13 @@ class RoomsController extends Controller
      *   tags={"Rooms"},
      *   path="/api/rooms/delete/{id}",
      *   summary="Suppression d'une salle",
+     *   @OA\Parameter(
+     *     name="id",
+     *         in="path",
+     *     required=true,
+     *     @OA\Schema(type="integer"),
+     *     description="ID de la salle"
+     *   ),
      *   @OA\Response(response=200, description="Suppression effectué avec succès"),
      *   @OA\Response(response=401, description="Vous n'êtes pas autorisé à réaliser cette action"),
      *   @OA\Response(response=404, description="Salle introuvable")

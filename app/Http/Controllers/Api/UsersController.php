@@ -74,6 +74,7 @@ class UsersController extends Controller
         ],200);
     }
 
+
     /**
      * @OA\Post(
      *     path="/api/newUser",
@@ -133,4 +134,90 @@ class UsersController extends Controller
             ], 201);
         }
     }
+
+    /**
+     * @OA\Put(
+     *   tags={"Users"},
+     *   path="/api/user/{id}/update",
+     *   summary="Mettre à jour un utilisateur",
+     *   @OA\RequestBody(
+     *     required=true,
+     *     @OA\JsonContent(
+     *       type="object",
+     *       @OA\Property(property="name", type="string", maxLength=255),
+     *       @OA\Property(property="email", type="string", format="email", maxLength=255),
+     *      )
+     *     
+     *   @OA\Response(response=200, description="OK"),
+     *   @OA\Response(response=401, description="Unauthorized"),
+     *   @OA\Response(response=404, description="Not Found")
+     * )
+     */
+    public function updateUser(Request $request, $id){
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found'
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'nullable|string|max:255',
+            'email' => [
+                'nullable',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($user->id),
+            ],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 400);
+        }
+
+        if ($request->has('name')) {
+            $user->name = $request->input('name');
+        }
+        if ($request->has('email')) {
+            $user->email = $request->input('email');
+        }
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'data' => $user
+        ], 200);
+    }
+
+    /**
+     * @OA\Delete(
+     *   tags={"Users"},
+     *   path="/api/user/{id}/delete",
+     *   summary="Supprimer un utilisateur",
+     *   @OA\Response(response=200, description="OK"),
+     *   @OA\Response(response=401, description="Unauthorized"),
+     *   @OA\Response(response=404, description="Not Found")
+     * )
+     */
+    public function deleteUser($id){
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Utilisateur non trouvé'
+            ], 404);  
+        }
+        $user->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Utilisateur supprimé avec succès'
+        ], 200);
+    }      
+
+
 }
